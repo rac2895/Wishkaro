@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/product.css' %}">
+
+{% endblock head %}
+
+
+
+
+{% block jumbotron %}
+
+    <div id="container">
+      <div id="slideshow" class="cycle-slideshow"
+        data-cycle-fx="shuffle"
+        data-cycle-manual-fx="scrollHorz"
+        data-cycle-speed="1000"
+        data-cycle-next="#next"
+        data-cycle-prev="#prev">
+    {% for item in images1 %}
+       <img src="{{item.image1.url}}"/><br/>
+     {% endfor %}
+
+      </div>
+      <img id="next" src="{% static 'images/next1.svg' %}"/>
+      <img id="prev" src="{% static 'images/prev1.svg' %}"/>
+    </div><br/>
+<br/>
+ <br/>
+{% endblock %}
+
+{% block content %}
+<!--<h1>Product({{count}} items)</h1>-->
+ <div class="row">
+  {% for product in product1 %}
+    <div class="col-md-3">
+       <div class="product">
+       <a href="{{product.get_absolute_url}}"><img src="{{product.image1.url}}" width='200' height='200'></a>
+
+        <p style="text-align:center">{{product.name1}}</p>
+        <p style="text-align:center"> Rs.{{product.price1}}</p>
+
+          <a href="#popup1">
+          <input class='btn btn-primary btn-block' type='submit' value='Contact Us'/><br/><br/><br/>
+
+
+         <!-- <div class="box">
+	<a class="button" href="#popup1">Let me Pop up</a>
+</div>-->
+
+
+         <!--<input class='btn btn-primary btn-block' type='submit' value='Contact Us' onclick="return confirm('Are you sure?')"/><br/>-->
+
+
+
+
+      </div>
+  </div>
+
+
+  {% endfor %}
+
+</div>
+
+         <div id="popup1" class="overlay">
+	<div class="popup">
+		<h3>For further assistance contact us</h3>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+		     <p><h4> Harshit Pathak</h4>
+              Email : hpathak69@gmail.com<br/>
+             Phone : 7746991448</p>
+            <p><h4>Rachit Jain</h4>
+             Email : jainrachit28@gmail.com<br/>
+             Phone : 7724915905</p>
+            <p><h4>Srijan Veer Shobhan</h4>
+             Email : srijanshobhan@gmail.com<br/>
+             Phone : 9453993502<br/></p>
+
+		</div>
+	</div>
+</div>
+
+
+<style>
+
+
+h1 {
+  text-align: center;
+  font-family: Tahoma, Arial, sans-serif;
+  color: #06D85F;
+  margin: 80px 0;
+}
+
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.button {
+  font-size: 1em;
+  padding: 10px;
+  color: #fff;
+  border: 2px solid #06D85F;
+  border-radius: 20px/50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #06D85F;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+  }
+  .popup{
+    width: 70%;
+  }
+}
+</style>
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+
+

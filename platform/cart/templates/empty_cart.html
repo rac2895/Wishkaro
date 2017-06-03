@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+   <link rel="stylesheet" href="{% static "css/product.css" %}"/>
+ {% endblock head %}
+
+
+{% block content %}
+
+
+<h1 style='text-align:center;'>fjbfkjvbfkj</h1>
+
+
+
+
+<div classs="row">
+	<div class="col-md-8 col-md-offset-2">
+	 <table class="table">
+       <thead>
+       <th>Item</th>
+        <th></th>
+       <th>Price</th>
+        <th>Qty</th>
+         <th></th>
+        <th>Sub Total</th>
+        </thead>
+
+
+
+
+
+      </table>
+
+       <p style="float:right"><strong>Estimated Total</strong>: <span class="total">Rs.{{cart.total}}</span></p>
+          <br/> <br/>
+          <a href="/"  class="btn btn-default continue_shop"  role="button"><span class="glyphicon glyphicon-chevron-left"></span>Continue Shopping</a>
+
+
+
+
+
+  </div>
+</div>
+
+
+{% endblock %}

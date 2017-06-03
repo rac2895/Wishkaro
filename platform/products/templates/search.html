@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/product.css' %}">
+
+{% endblock head %}
+   
+
+
+{% block content %}
+
+<h1>Search result for: {{ query }}({{count}} items)</h1>
+   <br/>
+<div class="row">
+  
+  {% for product in products %} 
+
+    <div class="col-md-3">
+       <div class="product">
+       <a href="{{product.get_absolute_url}}"><img src="{{product.image.url}}" width='200' height='200'></a>
+       <a href="{{product.get_absolute_url}}"><p style="text-align:center">{{product.name}}</p></a> 
+       <p style="text-align:center"> Rs. {{product.price}}</p> 
+      </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock %}

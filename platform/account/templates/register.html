@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load staticfiles i18n %}
+
+{% block head %}
+  <link href="{% static 'css/signup.css' %}" rel="stylesheet">
+{% endblock head %}
+
+{% block content %}
+  <div class="signup">
+    <h2>{% trans 'Create Account  for W!SHKARO' %}</h2>
+    <form action="{% url 'register' %}" method="post" role="form" >
+      {% csrf_token %}
+      {% for field in form.visible_fields %}
+        <div class="form-group{% if field.errors %} has-error{% endif %}">
+          <label for="{{ field.label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.help_text %}
+            <span class="help-block">{{ field.help_text|safe }}</span>
+          {% endif %}
+          {% for error in field.errors %}
+            <label class="control-label">{{ error }}</label>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-info btn-lg form-control">{% trans 'Register' %}</button>
+    </form>
+      <hr/>
+    <p> Already have an account ?<a href="{% url 'login' %}"> Sign in</a></p>
+  </div>
+ 
+{% endblock  %}

@@ -1,0 +1,70 @@
+
+
+    <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/"><strong style="color:orange">WishKaro!</strong></a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+          <form class="navbar-form navbar-left" role="search" action="{% url 'search'  %}">
+                  <div class="input-group" style="width:700px">
+                    <input type="text" class="form-control" name="q" placeholder="So, What are you wishing for today ?" />
+
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-warning"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                  </div>
+                </form>
+        <ul class="nav navbar-nav navbar-right">
+             <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-film "></span>  Renting <span class="caret"></span> </a>
+                   <ul class="dropdown-menu">
+                        <li><a href="{% url 'rent' %}">Books</a> </li>
+
+                              <li><a href="{%url 'misc'%}">Misc</a> </li>
+
+
+
+
+
+
+                         </ul>
+                     </li>
+           <!-- <li><a href="{% url 'rent' %}"><span class="glyphicon glyphicon-book "></span>  Renting <span class="badge"></span></a></li>-->
+            <li><a href="{% url 'cart' %}"><span class="glyphicon glyphicon-shopping-cart "></span>Cart <span class="badge">{% if not request.session.items_total %} 0 {% else %} {{ request.session.items_total }} {% endif%}</span></a></li>
+
+            {% if user.is_authenticated %}
+          <!-- <li><a href="{% url 'Logout' %}"><span class="glyphicon glyphicon-user"></span></a></li>-->
+
+            <li class="dropdown">
+                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Hi {{ user.get_full_name|default:user.username }}! <span class="caret"></span> </a>
+                         <ul class="dropdown-menu">
+                              <!--<li><a href="#">Your account</a> </li>
+                             <li><a href="#">Settings</a> </li>
+                             <li><a href="#">Dashboard</a> </li>-->
+                              <li><a href="{% url 'rent' %}">Renting</a> </li>
+
+                              <li><a href="{%url 'change_password'%}">Change Password</a> </li>
+
+                             <li><a href="{% url 'Logout' %}">Logout</a> </li>
+
+
+
+
+                         </ul>
+                     </li>
+
+            {% else %}
+            <li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-user "></span> Sign in</a></li>
+            {% endif %}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>

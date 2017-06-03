@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+{% endblock head %}
+
+
+{% block content %}
+<div class="login_cover">
+<div class="row">
+  <hr/>
+  <h1 style="text-align:center">Login</h1>
+    {% if form.non_field_errors %}
+      {% for error in form.non_field_errors %}
+        <div class="alert alert-danger alert-dismissable">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          {{ error }}
+        </div>
+      {% endfor %}
+    {% endif %}
+      <form method="post" action="" role="form">
+        {% csrf_token %}
+        <div class="form-group{% if form.username.errors %} has-error{% endif %}">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" name="username" placeholder="Username"/>
+          {% for error in form.username.errors %}
+            <label class="control-label">{{ error }}</label>
+          {% endfor %}
+        </div>
+        <div class="form-group{% if form.password.errors %} has-error{% endif %}">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password"/>
+          {% for error in form.password.errors %}
+            <label class="control-label">{{ error }}</label>
+          {% endfor %}
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-warning form-control ">Log in</button>
+          <hr/>
+
+            </div>
+          </form>
+
+
+
+    <p>
+   <ul>
+   {% if user and not user.is_anonymous %}
+
+     <li>
+       <!--<a> Hello {{ user.get_full_name|default:user.username }}! </a>-->
+       <a href="/"> Hello {{ user.get_full_name|default:user.username }}! </a>
+
+
+     </li>
+
+
+
+       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+
+
+
+
+   {% else %}
+
+       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}"><button>Login with Facebook</button></a>
+
+
+      <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}"><button>Login with Google</button></a>
+
+
+       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}"><button>Login with Twitter</button></a>
+
+   {% endif %}
+   </ul>
+ </p>
+
+
+
+          <p style="text-align:center">New to W!SHKARO ?</p>
+          <a href="{% url 'register' %}" class="btn btn-success form-control">Register</a>
+
+        </div>
+        <div class="password">
+          <p style="color:orange">Forgot your Password ? <a href="/password_reset/" >Reset it</a></p>
+
+
+
+</div>
+
+</div>
+<br/><br/>
+<hr/>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}

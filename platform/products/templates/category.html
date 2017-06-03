@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ c.name }}</h1>
+{{ c.description }}
+<br /><br />
+   {% for p in products %}
+   <div class="product">
+       <a href="{{ p.get_absolute_url }}"><img src="{{ p.image.url }}" alt="{{ p.name }}" class="bn" /><br />{{ p.name }}</a>
+   </div>
+  {% endfor %}
+{% endblock %}

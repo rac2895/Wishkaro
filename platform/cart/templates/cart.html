@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+   <link rel="stylesheet" href="{% static "css/product.css" %}"/>
+ {% endblock head %}
+
+
+{% block content %}
+{% if empty %}
+
+<h1 style='text-align:center;'>{{ empty_message }}</h1>
+
+{% else %}
+
+
+<div classs="row">
+	<div class="col-md-8 col-md-offset-2">
+	 <table class="table">
+       <thead>   
+       <th>Item</th>
+        <th></th>
+       <th>Price</th>
+        <th>Qty</th>
+         <th></th>
+        <th>Sub Total</th>
+        </thead>
+       
+        {% for item in cart.cartitem_set.all %}
+
+
+          <tr>
+          	<td><a href="{{item.product.get_absolute_url}}"><img src="{{item.product.image.url }}" width=60, height=60></a></td>
+			<td><a href="{{item.product.get_absolute_url}}">{{ item.product }} {% if item.variations.all %}<ul>{% for subitem in item.variations.all %}<li>{{ subitem.category|capfirst}} : {{ subitem.title|capfirst }}{% endfor %}</li><ul> {% endif %}</td>
+			<td> Rs. {{ item.product.price }}</a></td>
+			<td>{{ item.quantity }}</td>
+
+			<td><a href='{% url "remove_from_cart" item.id %}'>Remove</a></td>
+
+			<td> Rs. {{ item.product.price }}</td></tr>
+
+
+
+
+
+
+				
+			
+		{% endfor %}
+
+		 
+
+      </table>
+
+       <p style="float:right"><strong>Estimated Total</strong>: <span class="total">Rs.{{cart.total}}</span></p>
+          <br/> <br/>
+          <a href="/"  class="btn btn-default continue_shop"  role="button"><span class="glyphicon glyphicon-chevron-left"></span>Continue Shopping</a>
+
+
+
+
+
+          {% if user.is_authenticated and request.session.items_total  %}
+       <!--  <a href="{% url 'place_order' %}"  class="btn btn-warning order_place"  role="button">Place Order</a>-->
+        <button class="btn btn-warning order_place" onclick="window.location.href='https://zohosecurepay.com/checkout/q5w230g-pgite4w3273jm/WishKaro'">Place order</button>
+
+         {%elif not request.session.items_total  %}
+        <h1><center><strong> <marquee behavior=scroll scrollamount="20">Your  cart is empty!!!! Keep shopping</marquee></strong></center></h1>
+          {% else %}
+          <a href="{% url 'login' %}"  class="btn btn-warning order_place"  role="button">Place Order</a>
+          {% endif %}
+
+  </div>
+</div>		
+{% endif %}
+
+{% endblock %}
