@@ -21,7 +21,7 @@ perform these steps through commandline (cmd)
 
 open cmd and type,,
 
-5. cd Desktop/wishkaro/platform
+5. cd Desktop/wishkaro/Platform
 
 
 
